@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.SceneManagement;
 public class EnemyController : MonoBehaviour
 {
     //Christopher Gelinas 300844877 COMP305 Assignment 3 Part 2
@@ -8,16 +8,16 @@ public class EnemyController : MonoBehaviour
     public NavMeshAgent Agent;
     public Transform SightStart;
     public Transform SightEnd;
-    
+
     //private instance variables
     private Transform Player;
-    public BoxCollider _boxCollider;
+    //public BoxCollider _boxCollider;
 
     // Use this for initialization
     void Start()
     {
         this.Player = GameObject.FindWithTag("Player").transform;
-        this._boxCollider = GetComponent<BoxCollider>();
+        //this._boxCollider = GetComponent<BoxCollider>();
 
     }
 
@@ -25,27 +25,35 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
 
-        
 
 
-
+        this.Agent.SetDestination(this.Player.position);
 
 
     }
 
-    
-    private void OnCollisionEnter(Collision BoxCollider)
+    void OnCollisionEnter(Collision collision)
     {
-        
-
-        if (BoxCollider.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag ("Player"))
         {
-           
-
-
-                this.Agent.SetDestination(this.Player.position);
-            
-
+            Destroy(this.gameObject);
         }
     }
 }
+    
+    
+  //  private void OnCollisionEnter(Collision BoxCollider)
+   // {
+        
+
+       // if (BoxCollider.gameObject.CompareTag("Player"))
+       // {
+           
+
+
+                
+            
+
+        
+    
+
